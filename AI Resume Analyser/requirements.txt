@@ -1,0 +1,9 @@
+Flask
+pdfplumber
+sentence-transformers
+scikit-learn
+torch
+numpy
+transformers
+tokenizers
+safetensors

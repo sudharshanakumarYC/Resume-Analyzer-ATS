@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Resume Analyzer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,sans-serif;
+}
+
+body{
+    position:relative;
+    overflow-x:hidden;
+    background:linear-gradient(120deg,#fff8e1,#ffecb3,#ffd54f,#ffecb3,#fff8e1);
+    background-size:400% 400%;
+    animation:gradientFlow 12s ease infinite;
+    color:#4e3b0f;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    top:0;
+    left:-30%;
+    width:60%;
+    height:100%;
+    background:radial-gradient(circle,rgba(255,255,255,0.55),transparent 70%);
+    filter:blur(40px);
+    animation:glowMove 9s ease-in-out infinite;
+    pointer-events:none;
+    z-index:0;
+}
+
+@keyframes gradientFlow{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+@keyframes glowMove{
+    0%{left:-30%;}
+    50%{left:100%;}
+    100%{left:-30%;}
+}
+
+.container{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:900px;
+    background:#fffdf5;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0px 0px 25px rgba(255,193,7,0.35);
+    border:1px solid #ffe082;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#b8860b;
+}
+
+form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.full{
+    grid-column:span 2;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+    color:#6b5510;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ffd54f;
+    border-radius:10px;
+    background:#fff8e1;
+    color:#4e3b0f;
+}
+
+input::placeholder{
+    color:#b3a16a;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#ffca28,#ffa000);
+    color:#3b2a00;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow:0px 4px 10px rgba(255,160,0,0.3);
+}
+
+button:hover{
+    background:linear-gradient(135deg,#ffb300,#ff8f00);
+    transform:scale(1.04) translateY(-4px);
+    box-shadow:0px 10px 20px rgba(255,160,0,0.5);
+}
+
+button:active{
+    transform:scale(0.98) translateY(0px);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📄AI Resume Analyzer</h1>
+
+<form action="/analyze"
+      method="POST"
+      enctype="multipart/form-data">
+
+<div>
+<label>Required Skills</label>
+<input type="text"
+       name="skills"
+       placeholder="Python, Flask, NLP">
+</div>
+
+<div>
+<label>Required Role</label>
+<input type="text"
+       name="role"
+       placeholder="Backend Developer">
+</div>
+
+<div>
+<label>Minimum CGPA</label>
+<input type="number"
+       step="0.01"
+       name="cgpa"
+       placeholder="8.0">
+</div>
+
+<div>
+<label>Required Certifications</label>
+<input type="text"
+       name="certifications"
+       placeholder="AWS, NPTEL">
+</div>
+
+<div>
+<label>Required Keywords</label>
+<input type="text"
+       name="keywords"
+       placeholder="Docker, Git, REST API">
+</div>
+
+<div>
+<label>Shortlist Count</label>
+<input type="number"
+       name="top_n"
+       value="10">
+</div>
+
+<div>
+<label>Internship Required</label>
+<select name="internship">
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+
+<div>
+<label>Prioritize Relevant Projects</label>
+<select name="projects">
+<option>Yes</option>
+<option>No</option>
+</select>
+</div>
+
+<div class="full">
+<label>Upload Resumes</label>
+<input type="file"
+       name="resumes"
+       accept=".pdf"
+       multiple>
+<p style="
+margin-top:8px;
+color:#8a7530;
+font-size:14px;
+">
+Note : Please select all resumes in a single upload.
+Use Ctrl + Click (or Shift + Click) to choose multiple PDF files. Dont uplaod Individually
+</p>
+</div>
+
+<div class="full">
+<button type="submit">
+   Analyze Resumes
+</button>
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>
